@@ -1,4 +1,5 @@
  /*
+ ##### @author : Sunil Dinday
  #####Binary Indexed tree 
  #####time Complexity:O(logn) for query and update as well
  #####Space Complexity:O(n)
