@@ -1,6 +1,6 @@
-/*--------------------------Belleman-Ford (Shortest Path)-----------------
-Note :can be used on edges with negative weight and can be used to detect cycle with negative weight(Total weight)
-Complexity:O(n*m)
+/*--------------------------Segment tree-----------------
+Build time:O(n)
+Time for each Query:O(logn)
 
 */
                 #include <bits/stdc++.h>
