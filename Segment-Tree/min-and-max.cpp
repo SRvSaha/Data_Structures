@@ -1,14 +1,10 @@
-/*--------------------------Segment tree-----------------
-Build time:O(n)
-Time for each Query:O(logn)
+/*
+--------------------------Segment tree-----------------
+Build time : O(n)
+Time for each Query : O(logn)
 
 */
-                #include <bits/stdc++.h>
-                #include<vector>
-                #include<map>
-                #include<set>
-                #include<algorithm>
-#include<cstdio>
+#include <bits/stdc++.h>
 #define gc getchar_unlocked
 using namespace std;
 typedef unsigned long long int  ull;
@@ -18,8 +14,8 @@ typedef long long int  ll;
 #define mp make_pair
 #define FR freopen("input.txt", "r", stdin);
 #define FW freopen("output.txt", "w", stdout);
-#define  Help_me  ios_base::sync_with_stdio(false);
-#define  lg(x)  ceil(log2(x))
+#define Help_me  ios_base::sync_with_stdio(false);
+#define lg(x)  ceil(log2(x))
 #define MX 12345679
 #define mod 1000000007
 const int inf=100000005;
@@ -30,7 +26,7 @@ void scanint(int &x)
     for(;(c<48 || c>57);c = gc());
     for(;c>47 && c<58;c = gc()) {x = (x<<1) + (x<<3) + c - 48;}
 }
-std::vector<pair<int,int> > adj[100];//adjancy list for the graph
+std::vector< pair<int,int> > adj[100];//adjacency list for the graph
 int val[100];
 struct seg
 {
@@ -50,7 +46,7 @@ void build(int node,int l,int r)
     else
     {
         int mid=(l+r)>>1;
-        build(2*node,l,mid);//taking left turn 
+        build(2*node,l,mid);//taking left turn
         build(2*node+1,mid+1,r);//taking right turn
         segment[node].mx=max(segment[2*node].mx,segment[2*node+1].mx);//taking maximum of two child of the current node
         segment[node].mn=min(segment[2*node].mn,segment[2*node+1].mn);//taking maximum of two child of the current node
@@ -86,33 +82,23 @@ int main()
     Help_me
     int start = clock();
     #ifndef ONLINE_JUDGE
-    //int number
-    //string s="646";
-    //stringstream s1(s);
-    //s1>>number
-    //stringstream convert;
-    //convert>>numbemidre;
-    //convert<<s
-    //getline(cin>>ws,s);
-//  FR
-//  FW
     #endif
-int n;//number of element in the array
-cin>>n;
-for(int i=0;i<n;i++)
-    cin>>val[i];
-build(1,0,n-1);//buiulding the segment tree.with  node 1 cover the range 0 to n-1
-int q;//enter number of query
-cin>>q;
-while(q--)
-{
-    int left,right,flag;//Enter the range in which you want to find minimum and maximum and press 1 for maximum and 0 for minimum
-    cin>>left>>right>>flag;
-    if(flag)
-    cout<<"Maximum is "<<query(1,0,n-1,left,right,1)<<endl;
-else
-cout<<"Minimum is "<<query(1,0,n-1,left,right,0)<<endl;
-}
-return 0;
-    
+    int n;//number of element in the array
+    cin>>n;
+    for(int i=0;i<n;i++)
+        cin>>val[i];
+    build(1,0,n-1);//building the segment tree.with  node 1 cover the range 0 to n-1
+    int q;//enter number of query
+    cin>>q;
+    while(q--)
+    {
+        int left,right,flag;//Enter the range in which you want to find minimum and maximum and press 1 for maximum and 0 for minimum
+        cin>>left>>right>>flag;
+        if(flag)
+            cout<<"Maximum is "<<query(1,0,n-1,left,right,1)<<endl;
+        else
+            cout<<"Minimum is "<<query(1,0,n-1,left,right,0)<<endl;
     }
+    return 0;
+
+}
