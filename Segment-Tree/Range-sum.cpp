@@ -1,14 +1,9 @@
-  /*---------------------------Range Sum----------------------------------
-  Finding sum of the subarray from l to r
-  Build Time:O(n)
-  Time for each Query:O(logn)
-  */
-                #include <bits/stdc++.h>
-                #include<vector>
-                #include<map>
-                #include<set>
-                #include<algorithm>
-#include<cstdio>
+/*---------------------------Range Sum----------------------------------
+  Finding sum of the sub-array from l to r
+  Build Time: O(n)
+  Time for each Query: O(logn)
+*/
+#include <bits/stdc++.h>
 #define gc getchar_unlocked
 using namespace std;
 typedef unsigned long long int  ull;
@@ -18,8 +13,8 @@ typedef long long int  ll;
 #define mp make_pair
 #define FR freopen("input.txt", "r", stdin);
 #define FW freopen("output.txt", "w", stdout);
-#define  Help_me  ios_base::sync_with_stdio(false);
-#define  lg(x)  ceil(log2(x))
+#define Help_me  ios_base::sync_with_stdio(false);
+#define lg(x)  ceil(log2(x))
 #define MX 12345679
 #define mod 1000000007
 const int inf=100000005;
@@ -34,8 +29,9 @@ int segment[200];
 int val[100];
 void build(int node,int l,int r)
 {
-	if(l==r)
+	if(l==r){
 		segment[node]=val[l];
+    }
 	else
 	{
 		int mid=(l+r)/2;
@@ -46,48 +42,39 @@ void build(int node,int l,int r)
 }
 int query(int node,int l,int r,int left,int right)
 {
-	if(l==left&&r==right)
+	if(l==left && r==right){
 		return segment[node];
+    }
 	int mid=(l+r)/2;
 	if(right<=mid)
 		return query(2*node,l,mid,left,right);
 	else if(left>mid)
 		return query(2*node+1,mid+1,r,left,right);
 	else
-		return query(2*node,l,mid,left,mid)+query(2*node+1,mid+1,r,mid+1,right);
+		return query(2*node,l,mid,left,mid) + query(2*node+1,mid+1,r,mid+1,right);
 }
 int main()
 {
 	Help_me
 	int start = clock();
 	#ifndef ONLINE_JUDGE
-	//int number
-	//string s="646";
-	//stringstream s1(s);
-	//s1>>number
-	//stringstream convert;
-	//convert>>numbere;
-	//convert<<s
-	//getline(cin>>ws,s);
-//	FR
-//	FW
 	#endif
 	int n;//number of element in the array
-cin>>n;
-for(int i=0;i<n;i++)
-    cin>>val[i];
-build(1,0,n-1);//buiulding the segment tree.with  node 1 cover the range 0 to n-1
-int q;//enter number of query
-cin>>q;
-while(q--)
-{
-    int left,right;
-    cin>>left>>right;
-    cout<<"Subarray Sum is: "<<query(1,0,n-1,left,right)<<endl;
+    cin>>n;
+    for(int i=0;i<n;i++)
+        cin>>val[i];
+    build(1,0,n-1);//building the segment tree.with  node 1 cover the range 0 to n-1
+    int q;//enter number of query
+    cin>>q;
+    while(q--)
+    {
+        int left,right;
+        cin>>left>>right;
+        cout<<"Sub-array Sum is: "<<query(1,0,n-1,left,right)<<endl;
+    }
+    	#ifndef LOCAL_TEST
+    		cout << "[Finished in " << clock() - start << " ms]" << endl;
+    	#endif
+
+    return 0;
 }
-	#ifndef LOCAL_TEST
-		cout << "[Finished in " << clock() - start << " ms]" << endl;
-	#endif
-	
-return 0;
-	}
