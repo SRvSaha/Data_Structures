@@ -24,6 +24,28 @@ void delete_node(Node** head, int key){
     prev->next = curr->next;
     free(curr);
 }
+void delete_at_position(Node** head, int pos){
+    Node* prev, *curr;
+    curr = *head;
+    if(*head == NULL)
+        return;
+    if(pos == 0){
+        // If we need to delete the node pointed by head
+        *head = curr->next;
+        free(curr);
+        return;
+    }
+    for(int i = 0; i < pos && curr != NULL; i++){
+        //incrementing the current pointer
+        prev = curr;
+        curr = curr->next;
+    }
+    if(curr == NULL)
+        // If position is more than the number of nodes
+        return;
+    prev->next = curr->next;
+    free(curr);
+}
 void push(Node** head, int data){
     Node* temp = new Node();
     temp->data = data;
@@ -50,5 +72,14 @@ int main(){
     print_ll(head);
     delete_node(&head, 7);
     print_ll(head);
+    delete_at_position(&head, 1);
+    print_ll(head);
+    delete_at_position(&head, 0);
+    print_ll(head);
+    delete_at_position(&head, 9);
+    print_ll(head);
+    delete_at_position(&head, 2);
+    print_ll(head);
+    delete_at_position(&head, 5);
     return 0;
 }
